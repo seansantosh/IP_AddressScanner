@@ -18,13 +18,12 @@ if __name__ == '__main__':
 		data = yaml.full_load(f)
 	for ip in data.get('ips'):
 		# Logic to check if IP VALID.
-        check(ip)
-		response=requests.get(ips)
+		check(ip)
+		response=requests.get("https://"+ip)
 		# Logic to check if IP is belonging to NGINX or IIS HOST based on response headers
-		print(response.headers)
-		if response.headers.Server == "Nginx":
+		if response.headers['Server'] == "Nginx":
 			print("IP is hosted on Nginx server")
-		elif response.headers.Server == "IIS":
+		elif response.headers['Server'] == "IIS":
 			print("IP is hosted on Nginx server")
 		else:
 			print("IP is hosted on other server")
